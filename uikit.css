@@ -155,3 +155,176 @@ mz-scroller {
         transform: rotate(360deg)
     }
 }
+
+
+
+@-webkit-keyframes mz-slash-moving {
+    0% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%)
+    }
+    50% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+@keyframes mz-slash-moving {
+    0% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%)
+    }
+    50% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+}
+
+.mz-autocompletar {
+    position: relative;
+}
+
+.mz-autocompletar-opc {
+    display: block;
+    padding: 3px 4px;
+    cursor: pointer;
+}
+
+    .mz-autocompletar-opc.active {
+        background: #4b95e3;
+        color: #fff;
+    }
+
+.mz-autocompletar-opc-hidden {
+}
+
+
+
+.mz-autocompletar-opc-cont {
+    background: #FFF;
+    color: #000;
+    position: absolute;
+    border: 1px solid #999;
+    margin-top: -1px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    z-index: 10000;
+    max-height: 132px;
+    overflow-y: auto;
+    background-origin: content-box;
+    box-sizing: border-box;
+}
+
+.mz-autocompletar-opc-hidden .mz-autocompletar-opc-cont, .mz-autocompletar-loading-holder {
+    display: none;
+}
+
+.mz-autocompletar-loading .mz-autocompletar-loading-holder {
+    display: block;
+    background: #FFF;
+    background-attachment: local;
+}
+
+.mz-autocompletar-noitems {
+    display: block;
+    background: white;
+    color: #888;
+    text-align: center;
+    pointer-events: none;
+    cursor: default;
+}
+
+.mz-autocompletar-clear {
+    float: right;
+}
+
+.mz-autocompletar-additem {
+    display: block;
+    background: white;
+    color: #00892d;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+    .mz-autocompletar-additem:hover {
+        background: #0c5a00;
+        color: white;
+        text-shadow: none;
+    }
+
+.mz-autocompletar-loading .mz-autocompletar-noitems {
+    display: none;
+}
+
+
+.progress-container {
+	width: 100%;
+	height: 5px;	
+}
+
+.progress-container .progress-bit {
+	width: 2%;
+	height: 5px;
+	position: absolute;
+	left: 0;
+	display: none;
+	background-color: #0E70C0;
+}
+
+.progress-container.active .progress-bit {
+	display: inherit;
+}
+
+.progress-container.discrete .progress-bit {
+	left: 0;
+	transition: width 100ms linear;
+	-webkit-transition: width 100ms linear;
+	-o-transition: width 100ms linear;
+	-moz-transition: width 100ms linear;
+	-ms-transition: width 100ms linear;
+}
+
+.progress-container.discrete.done .progress-bit {
+	width: 100%;
+}
+
+.progress-container.infinite .progress-bit {
+	animation-name: progress;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	-ms-animation-name: progress;
+	-ms-animation-duration: 4s;
+	-ms-animation-iteration-count: infinite;
+	-ms-animation-timing-function: linear;
+	-webkit-animation-name: progress;
+	-webkit-animation-duration: 4s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: progress;
+	-moz-animation-duration: 4s;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+}
+
+.progress-container.infinite.done .progress-bit {
+	transition: opacity 200ms linear;
+	-webkit-transition: opacity 200ms linear;
+	-o-transition: opacity 200ms linear;
+	-moz-transition: opacity 200ms linear;
+	-ms-transition: opacity 200ms linear;
+}
+
+@keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
+@-ms-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
+@-webkit-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
+@-moz-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
