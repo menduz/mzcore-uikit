@@ -1,6 +1,6 @@
 # mzcore-uikit
 
-Simple components for mzcore, includes: `<mz-autocomplete>` `<clear />` 
+Simple components for mzcore, includes: `<mz-autocomplete>` `<mz-taber>` `<mz-tab>` 
 
 ## Install
 
@@ -86,4 +86,51 @@ export class UserSearchWindow extends mz.app.Page {
     Email: 'agustin@soflex.com.ar'
   }
 }
+```
+
+## `<mz-taber>`
+
+Provides a simple way for creating tabbed content.
+
+### Usage
+
+```xml
+<!-- myView.xml -->
+<mz-taber>
+  <mz-tab label="Wall">
+    User's wall
+  </mz-tab>
+  <mz-tab label="Messages">
+    Message list
+  </mz-tab>
+  <mz-tab label="Photos">
+    Message list
+  </mz-tab>
+</mz-taber>
+```
+
+renders as:
+
+```html
+<div class="mz-taber">
+  <div class="mz-taber-nav">
+    <ul class="mz-taber-tab-list">
+      <li class="mz-taber-tab active">
+        Wall
+      </li>
+      <li class="mz-taber-tab">
+        Messages
+      </li>
+      <li class="mz-taber-tab">
+        Photos
+      </li>
+    </ul>
+  </div>
+  <div class="mz-taber-content">
+    <!-- content switcher -->
+    <div class="mz-tab" label="Wall">
+      User's wall
+    </div>
+  </div>
+</div>
 ```
