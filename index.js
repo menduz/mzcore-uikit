@@ -12,12 +12,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", './mz-sidebar'], function (require, exports, mz_sidebar_1) {
+define(["require", "exports", './mz-sidebar', './mz-autocomplete', './mz-tabs'], function (require, exports, mz_sidebar_1, mz_autocomplete_1, mz_tabs_1) {
     function __export(m) {
         for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
     }
     mz.loadCss(module.getPath('./uikit.css'));
     __export(mz_sidebar_1);
+    __export(mz_autocomplete_1);
+    __export(mz_tabs_1);
     var MzClear = (function (_super) {
         __extends(MzClear, _super);
         function MzClear() {
