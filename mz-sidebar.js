@@ -14,8 +14,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 define(["require", "exports"], function (require, exports) {
     mz.loadCss(module.getPath('./uikit.css'));
-    function activatePlugin() { }
-    exports.activatePlugin = activatePlugin;
     var sidebarList = [];
     var MzSidebar = (function (_super) {
         __extends(MzSidebar, _super);
@@ -23,8 +21,8 @@ define(["require", "exports"], function (require, exports) {
             var _this = this;
             if (!('opened' in attr))
                 attr['opened'] = false;
+            _super.call(this, rootNode, {}, children, a, b, scope);
             this.backdrop = $('<div class="mz-fit" style="z-index:99990;">');
-            _super.call(this, rootNode, attr, children, a, b, scope);
             this.width = parseFloat(attr['width'] || 256);
             this.DOM.css({
                 position: 'absolute',
@@ -36,7 +34,7 @@ define(["require", "exports"], function (require, exports) {
             });
             this.backdrop.on('mousedown touchstart', function () { _this.opened = false; });
             sidebarList.push(this);
-            this.startComponent();
+            this.initAttr(attr);
         }
         MzSidebar.prototype.opened_changed = function (visible) {
             if (visible) {

@@ -1,7 +1,5 @@
 mz.loadCss(module.getPath('./uikit.css'));
 
-export function activatePlugin() { }
-
 var sidebarList: MzSidebar[] = [];
 
 @MzSidebar.RegisterComponent("mz-sidebar")
@@ -24,10 +22,11 @@ export class MzSidebar extends mz.Widget {
         if (!('opened' in attr))
             attr['opened'] = false;
 
+        super(rootNode, {}, children, a, b, scope);
+
         this.backdrop = $('<div class="mz-fit" style="z-index:99990;">');
 
-        super(rootNode, attr, children, a, b, scope);
- 
+
         this.width = parseFloat(attr['width'] || 256);
 
         this.DOM.css({
@@ -43,7 +42,7 @@ export class MzSidebar extends mz.Widget {
 
         sidebarList.push(this);
 
-        this.startComponent();
+        this.initAttr(attr);
     }
 
     private opened_changed(visible: boolean) {

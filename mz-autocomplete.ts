@@ -133,7 +133,7 @@ export class MzAutocomplete extends mz.widgets.MzInput {
 
         this.onNew = b.onNew || null;
 
-        this.emptyLabel = b.emptyLabel || ñ('No se encontraron resultados');
+        this.emptyLabel = b.emptyLabel || mz.translate('No se encontraron resultados');
 
         this.origen = b.origen || null;
     }
