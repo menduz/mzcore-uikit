@@ -353,7 +353,8 @@ mz-scroller {
     color: #666;
     text-decoration: none;
     border: 1px solid transparent;
-    border-bottom: 0
+    border-bottom: 0;
+    cursor: pointer;
 }
 
 .mz-taber .mz-taber-tab.active {

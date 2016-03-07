@@ -2,11 +2,9 @@
 @MzTab.Template('<div class="mz-tab" />', ':root')
 @MzTab.ConfigureUnwrapped
 export class MzTab extends mz.widgets.MzSwitcherPanel {
-
+    static EVENTS = mz.copy({ TabShown: 'tab_shown' }, mz.widgets.MzSwitcherPanel.EVENTS);
+    
     parent: MzTaber;
-
-    @MzTab.proxy
-    badge: string;
 
     @MzTab.proxy
     label: string;
@@ -14,7 +12,7 @@ export class MzTab extends mz.widgets.MzSwitcherPanel {
     @MzTab.Attribute
     visible: boolean;
 
-    visible_changed(visible) {
+    private visible_changed(visible) {
         requestAnimationFrame(() => {
             if (this.parent && this.parent.tabs) {
                 this.parent.tabs.update(this);
@@ -45,9 +43,9 @@ export class MzTab extends mz.widgets.MzSwitcherPanel {
 <div class="mz-taber">
     <div class="mz-taber-nav">
         <mz-repeat list="{this.tabs}" tag="ul" class="mz-taber-tab-list">
-            <a onclick="{this.tabClicked}" class="mz-taber-tab {active: scope.isVisible()}">
-                {scope.label} <span class="badge" visible="{scope.badge}">{scope.badge}</span>
-            </a>
+            <li onclick="{this.tabClicked}" class="mz-taber-tab {active: scope.isVisible()}">
+                {scope.label}
+            </li>
         </mz-repeat>
     </div>
     <div class="mz-taber-content" />
@@ -65,9 +63,8 @@ export class MzTaber extends mz.widgets.MzSwitcher {
         children.forEach(child => {
             if (child instanceof MzTab) {
                 this.tabs.push(child);
-
                 child.parent = this;
-                this.listening.push(child.on('valueChanged', mz.screenDelayer(() => this.tabs.update(child))));
+                this.listening.push(child.on('valueChanged', () => this.tabs.update(child)));
             }
         });
 
@@ -83,12 +80,12 @@ export class MzTaber extends mz.widgets.MzSwitcher {
     show(tab: MzTab) {
         super.show(<mz.widgets.MzSwitcherPanel>tab);
         this.tabs && this.tabs.trigger('changed', 'refresh');
+        (<mz.widgets.MzSwitcherPanel>tab).emit(MzTab.EVENTS.TabShown);
     }
 
-    tabClicked(ev: mz.IMZComponentEvent) {
+    private tabClicked(ev: mz.IMZComponentEvent) {
         if (ev.data instanceof MzTab) {
             this.show(ev.data);
-            ev.data.emit(MzTaber.EVENTS.TabClicked, ev);
             this.emit(MzTaber.EVENTS.TabClicked, ev.data);
         }
     }

@@ -34,10 +34,7 @@ define(["require", "exports"], function (require, exports) {
                 this.parent.show(this.parent.tabs.single(function (x) { return x !== _this; }));
             }
         };
-        __decorate([
-            MzTab.proxy, 
-            __metadata('design:type', String)
-        ], MzTab.prototype, "badge", void 0);
+        MzTab.EVENTS = mz.copy({ TabShown: 'tab_shown' }, mz.widgets.MzSwitcherPanel.EVENTS);
         __decorate([
             MzTab.proxy, 
             __metadata('design:type', String)
@@ -66,7 +63,7 @@ define(["require", "exports"], function (require, exports) {
                 if (child instanceof MzTab) {
                     _this.tabs.push(child);
                     child.parent = _this;
-                    _this.listening.push(child.on('valueChanged', mz.screenDelayer(function () { return _this.tabs.update(child); })));
+                    _this.listening.push(child.on('valueChanged', function () { return _this.tabs.update(child); }));
                 }
             });
             var firstTab = this.tabs.first();
@@ -78,11 +75,11 @@ define(["require", "exports"], function (require, exports) {
         MzTaber.prototype.show = function (tab) {
             _super.prototype.show.call(this, tab);
             this.tabs && this.tabs.trigger('changed', 'refresh');
+            tab.emit(MzTab.EVENTS.TabShown);
         };
         MzTaber.prototype.tabClicked = function (ev) {
             if (ev.data instanceof MzTab) {
                 this.show(ev.data);
-                ev.data.emit(MzTaber.EVENTS.TabClicked, ev);
                 this.emit(MzTaber.EVENTS.TabClicked, ev.data);
             }
         };
@@ -94,7 +91,7 @@ define(["require", "exports"], function (require, exports) {
         MzTaber = __decorate([
             mz.Widget.RegisterComponent("mz-taber"),
             MzTaber.ConfigureUnwrapped,
-            MzTaber.Template("\n<div class=\"mz-taber\">\n    <div class=\"mz-taber-nav\">\n        <mz-repeat list=\"{this.tabs}\" tag=\"ul\" class=\"mz-taber-tab-list\">\n            <a onclick=\"{this.tabClicked}\" class=\"mz-taber-tab {active: scope.isVisible()}\">\n                {scope.label} <span class=\"badge\" visible=\"{scope.badge}\">{scope.badge}</span>\n            </a>\n        </mz-repeat>\n    </div>\n    <div class=\"mz-taber-content\" />\n</div>\n", '.mz-taber-content'), 
+            MzTaber.Template("\n<div class=\"mz-taber\">\n    <div class=\"mz-taber-nav\">\n        <mz-repeat list=\"{this.tabs}\" tag=\"ul\" class=\"mz-taber-tab-list\">\n            <li onclick=\"{this.tabClicked}\" class=\"mz-taber-tab {active: scope.isVisible()}\">\n                {scope.label}\n            </li>\n        </mz-repeat>\n    </div>\n    <div class=\"mz-taber-content\" />\n</div>\n", '.mz-taber-content'), 
             __metadata('design:paramtypes', [Node, Object, Array, Object, Object, Object])
         ], MzTaber);
         return MzTaber;
