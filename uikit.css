@@ -328,3 +328,41 @@ mz-scroller {
 @-ms-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
 @-webkit-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
 @-moz-keyframes progress { from { left: 0; width: 2%; }	50% { left: 50%; width: 5%; } to { left: 98%; width: 2%; } }
+
+
+
+.mz-taber .mz-taber-nav {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd
+}
+
+.mz-taber .mz-taber-tab .badge {
+    margin-left: 5px
+}
+
+.mz-taber .mz-taber-tab-list {
+    margin-bottom: -1px
+}
+
+.mz-taber .mz-taber-tab {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-bottom: 0
+}
+
+.mz-taber .mz-taber-tab.active {
+    color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+    border-radius: 3px 3px 0 0
+}
+
+.mz-taber .mz-taber-tab:hover {
+    text-decoration: none
+}
