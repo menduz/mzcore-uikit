@@ -29,9 +29,10 @@ You must provide a method used for fullfill the autocomplete list, this method s
 ...
 
 <mz-autocomplete searchMethod="{this.performSearch}" placeholder="Search an user" mz-model="selectedUser">
-  <b>{scope.Name}</b> (<span>{scope.Email}</span>)
+  <b>{scope.Name}</b> ({scope.Email})
 </mz-autocomplete>
 
+<!--
 <h1>Selected user details</h1>
 <ul visible="{this.selectedUser}">
   <li>Name: {this.selectedUser.Name}</li>
@@ -40,7 +41,7 @@ You must provide a method used for fullfill the autocomplete list, this method s
 <div visible="{!this.selectedUser}">
   No user selected!
 </div>
-
+-->
 ...
 ```
 
