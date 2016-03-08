@@ -8,7 +8,7 @@ var cssClassLoadingHolder = cssClass + '-loading-holder';
 
 @MzAutocomplete.Template(`
 <div class="${cssClass} {${cssClassHidden}: !this.contentVisible, ${cssClassLoading}: this.contentLoading}" name="elem">
-    <button visible="{this.value != null}" onclick="{this.clear}" class="${cssClassClear}">X</button>
+    <button visible="{this.value != null}" onclick="{this.clear}" class="${cssClassClear}"></button>
     <input 
         type="search" 
         name="input" 
@@ -42,7 +42,7 @@ export class MzAutocomplete extends mz.widgets.MzInput {
 
     private static maxHeight = 130;
 
-    currentInputValue = 0;
+    currentInputValue = '';
 
 
     //elem: mz.Widget;
@@ -51,9 +51,7 @@ export class MzAutocomplete extends mz.widgets.MzInput {
 
     DOMContenedorOpciones: mz.Widget;
 
-    origen: (filtro: string) => Promise<Array<any>>;
-
-    dataList = [];
+    searchMethod: (filtro: string) => Promise<Array<any>>;
 
     onNewLabel: string;
     emptyLabel: string;
@@ -61,6 +59,8 @@ export class MzAutocomplete extends mz.widgets.MzInput {
 
     @MzAutocomplete.proxy
     maxHeight: number;
+
+    dataList = [];
 
     onInputBlur() {
         this.renderValue();
@@ -135,7 +135,7 @@ export class MzAutocomplete extends mz.widgets.MzInput {
 
         this.emptyLabel = b.emptyLabel || mz.translate('No se encontraron resultados');
 
-        this.origen = b.origen || null;
+        this.searchMethod = b.searchMethod || null;
     }
 
     private clear() {
@@ -158,7 +158,7 @@ export class MzAutocomplete extends mz.widgets.MzInput {
             this.contentLoading = true;
         }
 
-        this.origen && this.origen(val).then(
+        this.searchMethod && this.searchMethod(val).then(
             (datos) => {
                 this.contentLoading = false;
 
